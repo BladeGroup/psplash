@@ -31,4 +31,7 @@
 /* Position of the image split from top edge, denominator of fraction */
 #define PSPLASH_IMG_SPLIT_DENOMINATOR 6
 
+/* Bool indicating display of a progress bar */
+#define PSPLASH_USE_PROGRESSBAR 1
+
 #endif

@@ -22,7 +22,9 @@
 #include "psplash-config.h"
 #include "psplash-colors.h"
 #include "psplash-poky-img.h"
+#if PSPLASH_USE_PROGRESSBAR
 #include "psplash-bar-img.h"
+#endif
 #include "radeon-font.h"
 
 #define SPLIT_LINE_POS(fb)                                  \
@@ -69,6 +71,7 @@ psplash_draw_msg (PSplashFB *fb, const char *msg)
 void
 psplash_draw_progress (PSplashFB *fb, int value)
 {
+#if PSPLASH_USE_PROGRESSBAR
   int x, y, width, height, barwidth;
 
   /* 4 pix border */
@@ -99,6 +102,7 @@ psplash_draw_progress (PSplashFB *fb, int value)
 
   DBG("value: %i, width: %i, barwidth :%i\n", value, 
 		width, barwidth);
+#endif
 }
 
 static int 
@@ -293,6 +297,7 @@ main (int argc, char** argv)
 			 POKY_IMG_ROWSTRIDE,
 			 POKY_IMG_RLE_PIXEL_DATA);
 
+#if PSPLASH_USE_PROGRESSBAR
   /* Draw progress bar border */
   psplash_fb_draw_image (fb, 
 			 (fb->width  - BAR_IMG_WIDTH)/2, 
@@ -304,6 +309,7 @@ main (int argc, char** argv)
 			 BAR_IMG_RLE_PIXEL_DATA);
 
   psplash_draw_progress (fb, 0);
+#endif
 
 #ifdef PSPLASH_STARTUP_MSG
   psplash_draw_msg (fb, PSPLASH_STARTUP_MSG);
